@@ -1,32 +1,17 @@
-const words = ['javascript', 'ruby', 'python', 'haskell', 'java', 'golang'];
+document.addEventListener("DOMContentLoaded", function () {
+  var charArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  const random = Math.floor(Math.random() * charArr.length);
+  var ch = charArr[random];
+  document.body.addEventListener('keydown', function (e) {
+    var keypress = String.fromCharCode(e.keyCode);
+    if (keypress.toLowerCase() == ch.toLowerCase()) {
+      var mypara = document.createElement("p");
 
-let startingGuesses = 5;
+      mypara.innerHTML = "Secret key is pressed";
 
-const guessesEl = document.querySelector('#guesses');
-guessesEl.textContent = 5;
-const randomWord = words[Math.floor(Math.random() * 6)];
-console.log(randomWord);
-let wordToGuess = ''
-for(let i = 0; i < randomWord.length; i++) {
-  wordToGuess += '_'
-}
-const wordEl = document.querySelector('#word');
-wordEl.textContent = wordToGuess;
-
-document.body.addEventListener('keyup', function(event) {
-  const letterIndex = randomWord.indexOf(event.key);
-  console.log(letterIndex);
-  if(letterIndex === -1) {
-    startingGuesses--;
-    guessesEl.textContent = startingGuesses;
-  } else {
-    let wordArray = wordToGuess.split('');
-    for(let i = 0; i < wordToGuess.length; i++) {
-      if(randomWord[i] === event.key) {
-        wordArray[i] = randomWord[i];
-      }
+      //Finally, append the element to the HTML body
+      document.body.appendChild(mypara);
+      ch = charArr[Math.floor(Math.random() * charArr.length)];
     }
-    wordToGuess = wordArray.join('');
-    wordEl.textContent = wordToGuess;
-  }
+  });
 });
